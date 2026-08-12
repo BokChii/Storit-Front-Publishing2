@@ -105,18 +105,40 @@ body > .mn-header > .mn-hearts {
   height: 45px;
 }
 
+.mn-avatar-level {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 38px;
+  height: 14px;
+  transform: translateX(-50%);
+  border: 1px solid var(--brown-700);
+  border-radius: 15px;
+  background: #fff;
+  color: var(--brown-700);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* 레벨 + 경험치 (Figma: 81x49 @ 66, 17) */
 .mn-level {
   position: absolute;
   left: 66px;
   top: 17px;
-  width: 81px;
+  width: 91px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .mn-level-name {
+  max-width: 91px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
