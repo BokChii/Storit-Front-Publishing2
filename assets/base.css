@@ -339,7 +339,7 @@ body > .mn-nav .mn-nav-icon {
   height: calc(25px * var(--frame-scale, 1));
 }
 body > .mn-nav .mn-nav-item {
-  font-size: calc(8px * var(--frame-scale, 1));
+  font-size: calc(9.5px * var(--frame-scale, 1));
 }
 body > .mn-nav .mn-nav-indicator {
   left: 50%;

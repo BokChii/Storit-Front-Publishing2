@@ -3,6 +3,73 @@
  * TODO: 백엔드 연동 시 목록 API 응답으로 교체
  */
 (function () {
+  // 정적 이미지 배너: HTML의 이미지·링크를 교체하면 개수는 자동 반영.
+  (function initHeroBanners() {
+    const track = document.querySelector(".mn-hero-track");
+    const count = document.querySelector(".mn-hero-count");
+    if (!track || !count) return;
+    const total = track.children.length;
+    if (!total) return;
+    const current = () => Math.max(0, Math.min(total - 1,
+      Math.round(track.scrollLeft / (track.clientWidth || 1))));
+    const updateCount = () => {
+      const text = `${current() + 1}/${total}`;
+      if (count.textContent !== text) count.textContent = text;
+    };
+    const moveTo = (index) => track.scrollTo({
+      left: Math.max(0, Math.min(total - 1, index)) * track.clientWidth,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+    track.addEventListener("scroll", updateCount, { passive: true });
+    track.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      moveTo(current() + (event.key === "ArrowRight" ? 1 : -1));
+    });
+
+    // 터치는 브라우저 기본 스와이프 사용. 마우스 드래그만 별도 지원.
+    let drag = null;
+    let suppressClick = false;
+    track.addEventListener("pointerdown", (event) => {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      suppressClick = false;
+      drag = { id: event.pointerId, x: event.clientX, left: track.scrollLeft,
+        index: current(), scale: track.getBoundingClientRect().width / track.clientWidth, moved: false };
+    });
+    track.addEventListener("pointermove", (event) => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const dx = (event.clientX - drag.x) / drag.scale;
+      if (!drag.moved && Math.abs(dx) < 6) return;
+      if (!drag.moved) {
+        drag.moved = true;
+        track.setPointerCapture(event.pointerId);
+        track.classList.add("is-dragging");
+      }
+      track.scrollLeft = drag.left - dx;
+    });
+    const finishDrag = (event) => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const state = drag;
+      drag = null;
+      if (!state.moved) return;
+      suppressClick = true;
+      const dx = (event.clientX - state.x) / state.scale;
+      track.classList.remove("is-dragging");
+      if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+      moveTo(state.index + (event.type !== "pointercancel" && Math.abs(dx) > 30 ? (dx < 0 ? 1 : -1) : 0));
+    };
+    track.addEventListener("pointerup", finishDrag);
+    track.addEventListener("pointercancel", finishDrag);
+    track.addEventListener("pointerleave", () => { if (drag && !drag.moved) drag = null; });
+    track.addEventListener("click", (event) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClick = false;
+    }, true);
+    updateCount();
+  })();
+
   // creator: 유저 제작 퀴즈면 제작자명(없으면 공식) / url: 원작 보러가기 링크(네이버웹툰 검색)
   // TODO: 백엔드 연동 시 각 퀴즈의 실제 작품 URL(titleId 직링크)로 교체
   const WEBTOONS = [

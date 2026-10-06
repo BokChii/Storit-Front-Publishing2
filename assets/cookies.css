@@ -112,8 +112,10 @@
 /* ── 보유 쿠키 요약 ───────────────────── */
 .ck-summary {
   display: flex;
-  gap: 30px;
-  padding: 19px;
+  align-items: center;
+  min-height: 98px;
+  /* 오른쪽 캐릭터 공간을 제외한 영역 중앙에 보유량 표시 */
+  padding: 19px 135px 19px 0;
   background: var(--cta-bg);
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -121,14 +123,17 @@
 
 .ck-summary-col {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  white-space: nowrap;
 }
 
 .ck-summary-label {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 18px;
+  line-height: 24px;
   color: #1c1000;
 }
 
@@ -136,18 +141,15 @@
   display: flex;
   align-items: baseline;
   gap: 5px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 20px;
-  color: #3d2000;
+  line-height: 24px;
+  color: var(--orange);
 }
 
 .ck-summary-val b {
-  font-size: 25px;
-}
-
-.ck-summary-val--won {
-  color: var(--orange);
+  font-size: 32px;
+  line-height: 40px;
 }
 
 /* ── 누적 사용 / 획득 ─────────────────── */

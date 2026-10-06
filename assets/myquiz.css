@@ -198,21 +198,21 @@
   height: 24px;
 }
 .mq-stat-k {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 14px;
   color: #3d2000;
   text-align: center;
 }
 .mq-stat-v {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 14px;
   color: #3d2000;
   opacity: 0.8;
 }
 .mq-stat-sub {
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 10px;
   color: #3d2000;
@@ -298,7 +298,7 @@
   background: #fff;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 10px;
   color: #3d2000;
@@ -368,7 +368,7 @@
   white-space: nowrap;
 }
 .mq-item-date {
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 10px;
   color: rgba(136, 136, 128, 0.8);
@@ -393,7 +393,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 10px;
   color: rgba(136, 136, 128, 0.8);

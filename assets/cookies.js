@@ -1,6 +1,6 @@
 (function () {
   // ── 데이터 (백엔드 연동 시 교체) ─────────────────
-  const SUMMARY = { balance: 80, won: 8000, earned: 1240, used: 1160 };
+  const SUMMARY = { balance: 80, earned: 1240, used: 1160 };
 
   const HISTORY = [
     [
@@ -230,7 +230,7 @@
   // 프리뷰 라우트: cookies.html?empty → 쿠키 없을 때(빈 상태) 화면.
   // 내역을 비우고 요약 수치도 0 으로 렌더 (백엔드 연동 전 디자인 확인용)
   const EMPTY_PREVIEW = new URLSearchParams(location.search).has("empty");
-  const S = EMPTY_PREVIEW ? { balance: 0, won: 0, earned: 0, used: 0 } : SUMMARY;
+  const S = EMPTY_PREVIEW ? { balance: 0, earned: 0, used: 0 } : SUMMARY;
 
   const fmt = (n) => n.toLocaleString("en-US");
 
@@ -239,8 +239,7 @@
     const el = document.querySelector(sel);
     if (el) el.textContent = txt;
   };
-  setText(".ck-summary-col:nth-child(1) .ck-summary-val b", fmt(S.balance));
-  setText(".ck-summary-col:nth-child(2) .ck-summary-val b", fmt(S.won));
+  setText(".ck-summary-val b", fmt(S.balance));
   setText(
     ".ck-substats .ck-substat:nth-child(1) .ck-substat-val",
     fmt(S.earned),

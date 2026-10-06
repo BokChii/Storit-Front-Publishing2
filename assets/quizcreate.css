@@ -92,7 +92,7 @@
   text-align: center;
 }
 .qc-step-title {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 18px;
   color: #000;
@@ -124,7 +124,7 @@
 .qc-label {
   display: block;
   margin-bottom: 4px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 14px;
   color: #000;
@@ -272,7 +272,7 @@
   height: 56px;
 }
 .qc-notice p {
-  font-size: 9px;
+  font-size: 9.5px;
   font-weight: 500;
   line-height: 14px;
   color: #1c1000;
