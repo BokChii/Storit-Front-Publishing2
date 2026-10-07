@@ -82,7 +82,7 @@
 
   // 이미 푼 작품의 응시 기록 (quiz.js 가 작품 제목을 키로 저장)
   // TODO: 백엔드 연동 시 응시 이력 API 응답으로 교체
-  const DONE_CTA = "결과\n보기";
+  const DONE_CTA = "결과 보기";
   const quizRecords = (function () {
     let r;
     try {

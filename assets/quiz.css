@@ -629,7 +629,7 @@ body:has(.qz-page)::after {
   top: 134px;
   text-align: center;
   color: #1c1000;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 22px;
 }
@@ -640,10 +640,10 @@ body:has(.qz-page)::after {
   right: 16px;
   top: 168px;
   text-align: center;
-  color: #1c1000;
-  font-size: 10px;
+  color: #000;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 14px;
+  line-height: 16px;
 }
 
 .qz-midnight-result {
@@ -661,7 +661,7 @@ body:has(.qz-page)::after {
   background: var(--Neutral-Brown-Mid, #5d3300);
   color: var(--Primary-Yellow-Light, #fefaf4);
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 25px;
@@ -680,7 +680,7 @@ body:has(.qz-page)::after {
   gap: 4px;
   justify-content: center;
   color: #888880;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 500;
   line-height: 12px;
   white-space: nowrap;
