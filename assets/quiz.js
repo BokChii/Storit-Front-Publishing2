@@ -72,6 +72,12 @@
   let locked = false; // 문항당 1회 선택
   let ticking = null;
   let startedAt = 0; // 첫 문항 시작 시각(경과 시간 계산용)
+  let remainingSeconds = 0;
+  let midnightTimeout = null;
+  let midnightResultTimeout = null;
+  let midnightScheduled = false;
+  let midnightShown = false;
+  let midnightFinalized = false;
 
   function elapsedSec() {
     return startedAt ? (Date.now() - startedAt) / 1000 : 0;
@@ -87,17 +93,56 @@
   function startTimer(sec) {
     stopTimer();
     if (!startedAt) startedAt = Date.now(); // 퀴즈 시작 시각
-    let remain = sec;
-    if (timerEl) timerEl.textContent = remain + "초";
+    remainingSeconds = sec;
+    if (!midnightScheduled) scheduleMidnightPopup();
+    if (timerEl) timerEl.textContent = remainingSeconds + "초";
     ticking = setInterval(() => {
-      remain -= 1;
-      if (timerEl) timerEl.textContent = Math.max(remain, 0) + "초";
-      if (remain <= 0) {
+      remainingSeconds -= 1;
+      if (timerEl) timerEl.textContent = Math.max(remainingSeconds, 0) + "초";
+      if (remainingSeconds <= 0) {
         stopTimer();
         // 시간 초과 → 오답 처리 후 다음 문항
         goNext();
       }
     }, 1000);
+  }
+
+  function scheduleMidnightPopup() {
+    const midnightPopup = document.querySelector(".qz-midnight");
+    if (!midnightPopup || midnightScheduled) return;
+    midnightScheduled = true;
+
+    const now = new Date();
+    const nextMidnight = new Date(now);
+    nextMidnight.setHours(24, 0, 0, 0);
+    const previewMidnight =
+      new URLSearchParams(location.search).get("midnight") === "1";
+    midnightTimeout = setTimeout(() => {
+      if (midnightShown) return;
+      stopTimer();
+      midnightShown = true;
+      midnightPopup.hidden = false;
+      if (!previewMidnight) {
+        midnightResultTimeout = setTimeout(finishAtMidnight, 5000);
+      }
+    }, previewMidnight ? 0 : Math.max(0, nextMidnight.getTime() - now.getTime()));
+
+    const close = () => {
+      midnightPopup.hidden = true;
+    };
+    const finishAtMidnight = () => {
+      if (midnightFinalized) return;
+      midnightFinalized = true;
+      if (midnightResultTimeout) clearTimeout(midnightResultTimeout);
+      midnightPopup.hidden = true;
+      finishQuiz();
+    };
+    midnightPopup.querySelector(".qz-midnight-close").addEventListener("click", close);
+    midnightPopup.querySelector(".qz-midnight-overlay").addEventListener("click", close);
+    midnightPopup.querySelector(".qz-midnight-result").addEventListener("click", finishAtMidnight);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !midnightPopup.hidden) close();
+    });
   }
 
   function renderQuestion() {

@@ -73,11 +73,11 @@
   // creator: 유저 제작 퀴즈면 제작자명(없으면 공식) / url: 원작 보러가기 링크(네이버웹툰 검색)
   // TODO: 백엔드 연동 시 각 퀴즈의 실제 작품 URL(titleId 직링크)로 교체
   const WEBTOONS = [
-    { title: "66666년 만에 환생한 흑마법사", thumb: 1, platform: 1, tags: ["사이다", "사이다"], cta: "퀴즈\n풀기", creator: "무케대왕", url: "https://comic.naver.com/search?keyword=66666%EB%85%84%20%EB%A7%8C%EC%97%90%20%ED%99%98%EC%83%9D%ED%95%9C%20%ED%9D%91%EB%A7%88%EB%B2%95%EC%82%AC" },
-    { title: "첫정", thumb: 2, platform: 2, tags: ["로맨스", "설렘폭발"], cta: "퀴즈\n풀기", url: "https://comic.naver.com/search?keyword=%EC%B2%AB%EC%A0%95" },
-    { title: "A.I. 닥터", thumb: 5, platform: 3, tags: ["사이다", "사이다"], cta: "퀴즈\n풀기", url: "https://comic.naver.com/search?keyword=A.I.%20%EB%8B%A5%ED%84%B0" },
-    { title: "서포터가 다 해먹음", thumb: 3, platform: 1, tags: ["판타지", "마법"], cta: "퀴즈\n풀기", creator: "불꽃소녀", url: "https://comic.naver.com/search?keyword=%EC%84%9C%ED%8F%AC%ED%84%B0%EA%B0%80%20%EB%8B%A4%20%ED%95%B4%20%EB%A8%B9%EC%9D%8C" },
-    { title: "회귀자의 은퇴 라이프", thumb: 4, platform: 1, tags: ["사이다", "사이다"], cta: "퀴즈\n풀기", url: "https://comic.naver.com/search?keyword=%ED%9A%8C%EA%B7%80%EC%9E%90%EC%9D%98%20%EC%9D%80%ED%87%B4%20%EB%9D%BC%EC%9D%B4%ED%94%84" },
+    { title: "66666년 만에 환생한 흑마법사", thumb: 1, platform: 1, tags: ["사이다", "사이다"], episode: "1~10화", cta: "퀴즈 풀기", creator: "무케대왕", url: "https://comic.naver.com/search?keyword=66666%EB%85%84%20%EB%A7%8C%EC%97%90%20%ED%99%98%EC%83%9D%ED%95%9C%20%ED%9D%91%EB%A7%88%EB%B2%95%EC%82%AC" },
+    { title: "첫정", thumb: 2, platform: 2, tags: ["로맨스", "설렘폭발"], episode: "1~20화", cta: "퀴즈 풀기", url: "https://comic.naver.com/search?keyword=%EC%B2%AB%EC%A0%95" },
+    { title: "A.I. 닥터", thumb: 5, platform: 3, tags: ["사이다", "사이다"], episode: "1~30화", cta: "퀴즈 풀기", url: "https://comic.naver.com/search?keyword=A.I.%20%EB%8B%A5%ED%84%B0" },
+    { title: "서포터가 다 해먹음", thumb: 3, platform: 1, tags: ["판타지", "마법"], episode: "1~40화", cta: "퀴즈 풀기", creator: "불꽃소녀", url: "https://comic.naver.com/search?keyword=%EC%84%9C%ED%8F%AC%ED%84%B0%EA%B0%80%20%EB%8B%A4%20%ED%95%B4%20%EB%A8%B9%EC%9D%8C" },
+    { title: "회귀자의 은퇴 라이프", thumb: 4, platform: 1, tags: ["사이다", "사이다"], episode: "1~50화", cta: "퀴즈 풀기", url: "https://comic.naver.com/search?keyword=%ED%9A%8C%EA%B7%80%EC%9E%90%EC%9D%98%20%EC%9D%80%ED%87%B4%20%EB%9D%BC%EC%9D%B4%ED%94%84" },
   ];
 
   // 이미 푼 작품의 응시 기록 (quiz.js 가 작품 제목을 키로 저장)
@@ -107,7 +107,10 @@
             ${w.tags.map((t) => `<span class="mn-tag">${t}</span>`).join("")}
           </div>
         </div>
-        <button type="button" class="mn-card-cta${done ? " is-done" : ""}" data-idx="${i}">${(done ? DONE_CTA : w.cta).replace("\n", "<br>")}</button>
+        <div class="mn-card-action">
+          <span class="mn-card-episode">${w.episode}</span>
+          <button type="button" class="mn-card-cta${done ? " is-done" : ""}" data-idx="${i}">${(done ? DONE_CTA : w.cta).replace("\n", "<br>")}</button>
+        </div>
       </article>`;
     }).join("");
 
@@ -576,7 +579,7 @@ return Date.now() < end;
       btn.classList.toggle("is-locked", locked);
       btn.disabled = locked;
       if (locked) {
-        // 퀴즈 풀기와 같은 60x60 박스라 "퀴즈/풀기" 처럼 두 줄로 끊는다
+        // 버튼 폭에 맞춰 잠금 안내를 두 줄로 표시한다.
         btn.innerHTML = `${label}요일<br>오픈`;
       } else {
         // 원래 라벨로 복귀 (이미 푼 작품이면 "결과 보기")

@@ -32,15 +32,39 @@
 
   // ── 검증 필드 ─────────────────────────────────
   const episode = $(".qc-episode");
+  const episodeError = $(".qc-episode-error");
   const question = $(".qc-question");
+  const questionCount = $(".qc-question-count-current");
   const correct = $(".qc-correct");
   const wrongs = $$(".qc-wrong");
+  const answerInputs = [correct, ...wrongs];
   const submit = $(".qc-submit");
   const filled = (el) => el && el.value.trim() !== "";
+  function updateQuestionCount() {
+    if (questionCount) questionCount.textContent = String(question.value.length);
+  }
+  function updateAnswerCounts() {
+    answerInputs.forEach((input) => {
+      const count = input.parentElement.querySelector(".qc-answer-count-current");
+      if (count) count.textContent = String(input.value.length);
+    });
+  }
+  const validEpisode = () => /^\d+$/.test(episode.value.trim());
+  function updateEpisodeValidation() {
+    const hasValue = filled(episode);
+    const valid = !hasValue || validEpisode();
+    if (episodeError) episodeError.hidden = valid;
+    episode.setAttribute("aria-invalid", String(!valid));
+    return valid;
+  }
   function updateSubmit() {
+    const episodeIsValid = updateEpisodeValidation();
+    updateQuestionCount();
+    updateAnswerCounts();
     submit.disabled = !(
       selectedTitle !== null &&
       filled(episode) &&
+      episodeIsValid &&
       filled(question) &&
       filled(correct) &&
       wrongs.every(filled)

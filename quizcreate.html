@@ -37,6 +37,7 @@
           <div class="qc-step-head">
             <span class="qc-step-no">2</span>
             <span class="qc-step-title">회차를 작성해주세요</span>
+            <span class="qc-episode-error" aria-live="polite" hidden>숫자만 입력하세요.</span>
           </div>
           <input class="qc-input qc-episode" type="text" placeholder="예: 5" />
         </div>
@@ -49,10 +50,17 @@
           </div>
 
           <div class="qc-field">
-            <label class="qc-label">퀴즈 질문</label>
+            <div class="qc-label-row">
+              <label class="qc-label" for="qc-question">퀴즈 질문</label>
+              <span class="qc-question-count" aria-live="polite">
+                <span class="qc-question-count-current">0</span> / 45자
+              </span>
+            </div>
             <input
+              id="qc-question"
               class="qc-input qc-question"
               type="text"
+              maxlength="45"
               placeholder="예: 무케가 왕이 되겠다고 결심하게 된 이유는?"
             />
           </div>
@@ -62,19 +70,31 @@
             <div class="qc-answers">
               <div class="qc-answer">
                 <span class="qc-ox qc-ox--o"><img src="assets/icon_ox_o.svg" alt="정답" /></span>
-                <input class="qc-input qc-answer-in qc-correct" type="text" placeholder="정답 작성하기" />
+                <div class="qc-answer-field">
+                  <input class="qc-input qc-answer-in qc-correct" type="text" maxlength="17" placeholder="정답 작성하기" />
+                  <span class="qc-answer-count" aria-live="polite"><span class="qc-answer-count-current">0</span> / 17자</span>
+                </div>
               </div>
               <div class="qc-answer">
                 <span class="qc-ox qc-ox--x"><img src="assets/icon_ox_x.svg" alt="오답" /></span>
-                <input class="qc-input qc-answer-in qc-wrong" type="text" placeholder="오답 작성하기" />
+                <div class="qc-answer-field">
+                  <input class="qc-input qc-answer-in qc-wrong" type="text" maxlength="17" placeholder="오답 작성하기" />
+                  <span class="qc-answer-count" aria-live="polite"><span class="qc-answer-count-current">0</span> / 17자</span>
+                </div>
               </div>
               <div class="qc-answer">
                 <span class="qc-ox qc-ox--x"><img src="assets/icon_ox_x.svg" alt="오답" /></span>
-                <input class="qc-input qc-answer-in qc-wrong" type="text" placeholder="오답 작성하기" />
+                <div class="qc-answer-field">
+                  <input class="qc-input qc-answer-in qc-wrong" type="text" maxlength="17" placeholder="오답 작성하기" />
+                  <span class="qc-answer-count" aria-live="polite"><span class="qc-answer-count-current">0</span> / 17자</span>
+                </div>
               </div>
               <div class="qc-answer">
                 <span class="qc-ox qc-ox--x"><img src="assets/icon_ox_x.svg" alt="오답" /></span>
-                <input class="qc-input qc-answer-in qc-wrong" type="text" placeholder="오답 작성하기" />
+                <div class="qc-answer-field">
+                  <input class="qc-input qc-answer-in qc-wrong" type="text" maxlength="17" placeholder="오답 작성하기" />
+                  <span class="qc-answer-count" aria-live="polite"><span class="qc-answer-count-current">0</span> / 17자</span>
+                </div>
               </div>
             </div>
           </div>

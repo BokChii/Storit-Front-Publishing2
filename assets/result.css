@@ -309,7 +309,7 @@ body:has(.rs-page) {
 /* 응원 입력 */
 .rs-cheer {
   position: relative;
-  height: 114px;
+  height: 118px;
 }
 .rs-cheer-mascot {
   position: absolute;
@@ -326,21 +326,52 @@ body:has(.rs-page) {
   position: relative;
   margin-top: 12px;
 }
-.rs-cheer-input {
+.rs-cheer-field {
+  position: relative;
   width: 70%;
   height: 37px;
-  padding: 0 62px 0 14px; /* 오른쪽 = 내부 버튼 자리 확보 */
+}
+.rs-cheer-input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 62px 0 14px;
   box-sizing: border-box;
   border: 0;
   border-radius: 16px;
   background: #fff;
-  font-family: var(--font-body);
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 10px;
   font-weight: 500;
+  line-height: 15px;
   color: var(--brown-800);
+  resize: none;
+  outline: none;
 }
 .rs-cheer-input::placeholder {
   color: #ccbb99;
+}
+.rs-cheer-count {
+  position: absolute;
+  left: calc(70% + 10.5px);
+  top: calc(50% + 12px);
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  color: var(--Neutral-Gray, rgba(136, 136, 128, 0.8));
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.11px;
+  pointer-events: none;
+}
+.rs-cheer-count-current {
+  font-weight: 700;
+}
+.rs-cheer-count-max {
+  font-weight: 500;
 }
 /* 입력창 오른쪽 꼬리 (말풍선 꼬리) */
 .rs-cheer-tail {
@@ -371,6 +402,8 @@ body:has(.rs-page) {
 }
 /* 전역 img{display:block} 등에 눌리지 않도록 명시적 숨김 */
 .rs-cheer-input[hidden],
+.rs-cheer-field[hidden],
+.rs-cheer-count[hidden],
 .rs-cheer-submit[hidden],
 .rs-cheer-tail[hidden] {
   display: none;

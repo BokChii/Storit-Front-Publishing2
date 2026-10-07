@@ -97,6 +97,20 @@
   line-height: 18px;
   color: #000;
 }
+.qc-episode-error {
+  margin-left: auto;
+  color: var(--Semantic-Error, #e33232);
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+  white-space: nowrap;
+}
+.qc-episode-error[hidden] {
+  display: none;
+}
 
 /* 공통 입력 */
 .qc-input {
@@ -121,6 +135,13 @@
 .qc-field {
   margin-top: 10px;
 }
+.qc-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
 .qc-label {
   display: block;
   margin-bottom: 4px;
@@ -128,6 +149,20 @@
   font-weight: 700;
   line-height: 14px;
   color: #000;
+}
+.qc-label-row .qc-label {
+  margin-bottom: 0;
+}
+.qc-question-count {
+  flex-shrink: 0;
+  color: var(--Neutral-Gray, rgba(136, 136, 128, 0.8));
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.11px;
 }
 
 /* STEP 1 : 웹툰 선택 가로 스크롤 */
@@ -252,8 +287,31 @@
   width: 20px;
   height: 20px;
 }
-.qc-answer-in {
+.qc-answer-field {
+  position: relative;
   flex: 1;
+  min-width: 0;
+}
+.qc-answer-in {
+  display: block;
+  width: 100%;
+  padding-right: 68px;
+}
+.qc-answer-count {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: var(--Neutral-Gray, rgba(136, 136, 128, 0.8));
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.11px;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* 안내 박스 */

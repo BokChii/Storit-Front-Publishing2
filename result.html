@@ -89,13 +89,18 @@
             </div>
             <img class="rs-cheer-mascot" src="assets/icon_cheer.svg" alt="" />
             <div class="rs-cheer-row">
-              <input
-                class="rs-cheer-input"
-                type="text"
-                maxlength="40"
-                placeholder="응원의 한마디를 입력해주세요..."
-              />
+              <div class="rs-cheer-field">
+                <textarea
+                  class="rs-cheer-input"
+                  maxlength="20"
+                  aria-label="응원의 한마디"
+                  placeholder="응원의 한마디를 입력해주세요..."
+                ></textarea>
+              </div>
               <img class="rs-cheer-tail" src="assets/cheer_tail.svg" alt="" />
+              <span class="rs-cheer-count" aria-live="polite">
+                <span class="rs-cheer-count-current">0</span>/<span class="rs-cheer-count-max">20</span>
+              </span>
               <button type="button" class="rs-cheer-submit">입력</button>
               <!-- 입력 완료 후: 작성한 응원 문구 (100% 너비) -->
               <div class="rs-cheer-result" hidden></div>

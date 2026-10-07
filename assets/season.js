@@ -66,6 +66,50 @@
   }
   renderList();
 
+  // ── 시즌 월 선택 ────────────────────────────────
+  const monthSelector = document.querySelector(".sn-month-selector");
+  const monthLabel = document.querySelector(".sn-month-label");
+  const previousMonthButton = document.querySelector(".sn-month-nav--prev");
+  const nextMonthButton = document.querySelector(".sn-month-nav--next");
+  if (monthSelector && monthLabel && previousMonthButton && nextMonthButton) {
+    const currentMonth = new Date();
+    currentMonth.setDate(1);
+    currentMonth.setHours(0, 0, 0, 0);
+    const selectedMonth = new Date(currentMonth);
+    const formatMonth = (date) =>
+      `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+    const isCurrentMonth = () =>
+      selectedMonth.getFullYear() === currentMonth.getFullYear() &&
+      selectedMonth.getMonth() === currentMonth.getMonth();
+    const updateMonth = () => {
+      const current = isCurrentMonth();
+      monthLabel.textContent = formatMonth(selectedMonth);
+      monthLabel.setAttribute(
+        "aria-label",
+        current
+          ? "현재 달로 이동"
+          : `${selectedMonth.getFullYear()}년 ${selectedMonth.getMonth() + 1}월, 현재 달로 이동`,
+      );
+      monthSelector.classList.toggle("is-previous-month", !current);
+      nextMonthButton.disabled = current;
+    };
+
+    previousMonthButton.addEventListener("click", () => {
+      selectedMonth.setMonth(selectedMonth.getMonth() - 1);
+      updateMonth();
+    });
+    nextMonthButton.addEventListener("click", () => {
+      if (isCurrentMonth()) return;
+      selectedMonth.setMonth(selectedMonth.getMonth() + 1);
+      updateMonth();
+    });
+    monthLabel.addEventListener("click", () => {
+      selectedMonth.setTime(currentMonth.getTime());
+      updateMonth();
+    });
+    updateMonth();
+  }
+
   // ── 남은 시간 카운트다운 (25일 03:41:29부터) ─────
   const cdEl = document.getElementById("sn-countdown");
   if (cdEl) {

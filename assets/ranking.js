@@ -69,6 +69,46 @@
   }
   renderList();
 
+  // ── 일자 변경 ────────────────────────────────────
+  const dateSelector = document.querySelector(".rk-date-selector");
+  const dateButton = document.querySelector(".rk-date-btn");
+  const previousDateButton = document.querySelector(".rk-date-nav--prev");
+  const nextDateButton = document.querySelector(".rk-date-nav--next");
+  if (dateSelector && dateButton && previousDateButton && nextDateButton) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const selectedDate = new Date(today);
+    const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}(${weekdays[date.getDay()]})`;
+    };
+    const updateDate = () => {
+      const isToday = selectedDate.getTime() === today.getTime();
+      dateButton.textContent = isToday ? "오늘" : formatDate(selectedDate);
+      dateButton.setAttribute("aria-label", isToday ? "오늘 날짜" : formatDate(selectedDate));
+      dateSelector.classList.toggle("is-date-changed", !isToday);
+      nextDateButton.disabled = isToday;
+    };
+
+    previousDateButton.addEventListener("click", () => {
+      selectedDate.setDate(selectedDate.getDate() - 1);
+      updateDate();
+    });
+    nextDateButton.addEventListener("click", () => {
+      if (selectedDate >= today) return;
+      selectedDate.setDate(selectedDate.getDate() + 1);
+      updateDate();
+    });
+    dateButton.addEventListener("click", () => {
+      selectedDate.setTime(today.getTime());
+      updateDate();
+    });
+    updateDate();
+  }
+
   // ── 행운 구간 (시간이 지날수록 좁아짐) ────────────
   // 초기 10~30위 → 자정에 가까울수록 좁혀져 최종 22위로 수렴.
   // (예: 진행률 75% 지점에서 19~24위)

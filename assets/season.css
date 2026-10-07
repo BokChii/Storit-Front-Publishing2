@@ -5,6 +5,77 @@
   padding-bottom: 100px;
 }
 
+/* ── 시즌 월 선택 ─────────────────────── */
+.sn-month-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  margin-top: 8px;
+  border-radius: 5px;
+  background: var(--Primary-Yellow, #ffd95e);
+}
+
+.sn-month-selector.is-previous-month {
+  background: var(--Primary-Yellow-Pale, #fef4d2);
+}
+
+.sn-month-nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #3d2000;
+  cursor: pointer;
+}
+
+.sn-month-nav--prev {
+  left: 0;
+}
+
+.sn-month-nav--next {
+  right: 0;
+}
+
+.sn-month-nav svg {
+  width: 8px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sn-month-label {
+  width: 100%;
+  height: 100%;
+  padding: 0 32px;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: #3d2000;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sn-month-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
 /* ── 시즌 안내 + 보상 티어 ─────────────── */
 .sn-info {
   position: relative;

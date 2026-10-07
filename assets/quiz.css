@@ -531,6 +531,167 @@ body:has(.qz-page)::after {
   color: #fefaf4;
 }
 
+/* ── 자정 안내 팝업 ─────────────────────────── */
+.qz-midnight {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qz-midnight[hidden] {
+  display: none;
+}
+
+.qz-midnight-overlay {
+  position: absolute;
+  inset: -100vmax;
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: rgba(28, 16, 0, 0.5);
+  cursor: pointer;
+}
+
+.qz-midnight-card {
+  position: relative;
+  width: 330px;
+  height: 312px;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  background: var(--Neutral-White, #fff);
+  overflow: hidden;
+}
+
+.qz-midnight-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 18px;
+  height: 18px;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.qz-midnight-close svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.qz-midnight-art {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 120px;
+}
+
+.qz-midnight-icon {
+  position: absolute;
+  left: 130px;
+  top: 32px;
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+  gap: 10px;
+  align-items: flex-start;
+  border-radius: 35px;
+  background: var(--Primary-Yellow-Pale, #fef4d2);
+  display: flex;
+  justify-content: center;
+}
+
+.qz-midnight-icon svg {
+  width: 50px;
+  height: 50px;
+}
+
+.qz-midnight-art > img {
+  position: absolute;
+  left: 126px;
+  top: 13.67px;
+  width: 78px;
+  height: 106px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.qz-midnight-title {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 134px;
+  text-align: center;
+  color: #1c1000;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.qz-midnight-description {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 168px;
+  text-align: center;
+  color: #1c1000;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+.qz-midnight-result {
+  position: absolute;
+  left: 61px;
+  top: 227px;
+  width: 207px;
+  height: 45px;
+  padding: 10px 69px 10px 68px;
+  border: 0;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--Neutral-Brown-Mid, #5d3300);
+  color: var(--Primary-Yellow-Light, #fefaf4);
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: -0.18px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.qz-midnight-note {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 283px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+  color: #888880;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 12px;
+  white-space: nowrap;
+}
+
+.qz-midnight-note svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
 /* 바텀시트 (Figma: 372x281 @ top 530.75) */
 /* 폭은 기기 화면 전체 (main 의 .mn-sheet / .mn-iv-sheet 와 동일 방식):
    프레임이 --frame-scale 로 스케일되므로 렌더 폭이 실제 뷰포트 폭(100vw)이 되도록

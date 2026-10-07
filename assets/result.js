@@ -79,7 +79,18 @@
   // 응원 입력 (프로토타입: 입력 후 초기화)
   const cheerBtn = document.querySelector(".rs-cheer-submit");
   const cheerInput = document.querySelector(".rs-cheer-input");
+  const cheerCount = document.querySelector(".rs-cheer-count-current");
   if (cheerBtn && cheerInput) {
+    const maxLength = Number(cheerInput.maxLength) || 20;
+    const updateCheerCount = () => {
+      if (cheerInput.value.length > maxLength) {
+        cheerInput.value = cheerInput.value.slice(0, maxLength);
+      }
+      if (cheerCount) cheerCount.textContent = String(cheerInput.value.length);
+    };
+    cheerInput.addEventListener("input", updateCheerCount);
+    updateCheerCount();
+
     cheerBtn.addEventListener("click", () => {
       const v = cheerInput.value.trim();
       if (!v) return;
@@ -95,7 +106,11 @@
         result.textContent = `${v}_${nickname}`;
         result.hidden = false;
       }
-      cheerInput.hidden = true;
+      const cheerField = document.querySelector(".rs-cheer-field");
+      const cheerCountEl = document.querySelector(".rs-cheer-count");
+      if (cheerField) cheerField.hidden = true;
+      else cheerInput.hidden = true;
+      if (cheerCountEl) cheerCountEl.hidden = true;
       cheerBtn.hidden = true;
       if (tail) tail.hidden = true;
     });
