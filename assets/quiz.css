@@ -567,6 +567,7 @@ body:has(.qz-page)::after {
 
 .qz-midnight-close {
   position: absolute;
+  z-index: 2;
   top: 15px;
   right: 15px;
   width: 18px;
